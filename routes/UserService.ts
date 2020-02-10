@@ -26,7 +26,7 @@ export class Register {
 
     @POST
     register(data: any): Promise<any> {
+        console.log("Register");
         return User.createUser(data);
     }
 }
-

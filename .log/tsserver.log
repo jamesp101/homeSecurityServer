@@ -1,0 +1,28 @@
+Info 0    [17:2:39.864] Starting TS Server
+Info 1    [17:2:39.866] Version: 3.7.5
+Info 2    [17:2:39.866] Arguments: C:\Program Files\nodejs\node.exe c:\code\homeSecurityServer\node_modules\typescript\bin\tsserver --logFile c:\code\homeSecurityServer\.log\tsserver.log --logVerbosity info --cancellationPipeName C:\Users\aclc\AppData\Local\Temp\8b19d8cf7032af1f3be138179a2affd8\tscancellation*
+Info 3    [17:2:39.866] Platform: win32 NodeVersion: 12 CaseSensitive: false
+Info 4    [17:2:39.947] Search path: c:/code/homeSecurityServer/models
+Info 5    [17:2:39.949] For info: c:/code/homeSecurityServer/models/User.ts :: Config file name: c:/code/homeSecurityServer/tsconfig.json
+Info 6    [17:2:39.949] Opened configuration file c:/code/homeSecurityServer/tsconfig.json
+Info 7    [17:2:40.146] Config: c:/code/homeSecurityServer/tsconfig.json : {
+ "rootNames": [
+  "c:/code/homeSecurityServer/database.ts",
+  "c:/code/homeSecurityServer/jsonbuilder.ts",
+  "c:/code/homeSecurityServer/server.ts",
+  "c:/code/homeSecurityServer/models/Devices.ts",
+  "c:/code/homeSecurityServer/models/User.ts",
+  "c:/code/homeSecurityServer/routes/UserService.ts"
+ ],
+ "options": {
+  "experimentalDecorators": true,
+  "target": 2,
+  "module": 1,
+  "outDir": "c:/code/homeSecurityServer/build",
+  "strict": true,
+  "esModuleInterop": true,
+  "emitDecoratorMetadata": true,
+  "forceConsistentCasingInFileNames": true,
+  "configFilePath": "c:/code/homeSecurityServer/tsconfig.json"
+ }
+}
