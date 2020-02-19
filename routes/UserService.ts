@@ -1,15 +1,6 @@
 import { Path, GET, PathParam, POST } from "typescript-rest";
-import sha256, { hash, HMAC } from 'fast-sha256';
 
-
-import { User } from '../models/User';
-import { IsEmail } from "sequelize-typescript";
-import from from 'tweetnacl-util';
-
-class UserJson {
-    username!: string;
-    password!: string;
-}
+import {User } from '../models/User';
 
 @Path('/login')
 export class Login {
@@ -26,7 +17,20 @@ export class Register {
 
     @POST
     register(data: any): Promise<any> {
-        console.log("Register");
+        console.log(data);
         return User.createUser(data);
     }
+}
+
+
+
+@Path('/user')
+export class UserConfig{
+
+    @Path(':id')
+    @GET
+    userDetails(@PathParam('id') id: string,){
+        return User.getUserInfo(id);
+    }
+
 }

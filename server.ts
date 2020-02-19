@@ -5,52 +5,46 @@ import { Server } from 'typescript-rest';
 import { Devices } from './models/Devices';
 import { User } from './models/User';
 
+import SocketIO from 'socket.io';
+import * as http from 'http';
+
+
 // Port 
 const port = 8080;
 
 
 
 
-
-new Promise((res, rej) => {
-    console.log('Connecting to Database');
-    sequelize.authenticate();
-    sequelize.sync({ force: true });
-    res();
-}).then(() => {
-    console.log('Database connected');
-
-}).then(() => {
-    User.createUser({
-        username: 'user123',
-        password: 'password123',
-        email: 'jms@yahoo.com',
-        firstname: 'james',
-        lastname: 'paul',
-    });
-
-    Devices.build({
-        deviceId: 'CAM-013',
-        alias: 'CAMERA-1',
-        status: 1,
-        userId: 1
-    })
-
-}).catch((err)=>{
-    console.error(`Database failed: ${err}`);
-});
-
+(async ()=>{
+    try{
+        console.log('Connecting to Database');
+        await sequelize.authenticate();
+        await sequelize.sync();
+        console.log('Database connected');
+    }catch(err){
+        console.error(`Database failed: ${err}`);
+    }
+})
 
 
 const app: express.Application = express();
-
-//rest 
 const apis = express.Router();
+
+
+
+
+
+
+let ht = http.createServer(app);
+
+let io = SocketIO(ht);
+io.on('connection', ()=>{
+    io.emit('event', {hello: "world"})
+});
 
 
 Server.loadServices(apis, './routes/*');
 app.use('apis', apis);
-
 
 app.listen(port, () => {
     Server.buildServices(app)

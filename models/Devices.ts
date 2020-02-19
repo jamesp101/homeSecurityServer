@@ -51,7 +51,7 @@ export class Devices extends Model<Devices> {
                 userId: data.userId
             }
         }).then((device) => {
-            return device
+            return device;
         }).catch((error)=>{
             console.log("Error: ${error}")
         });
