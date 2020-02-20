@@ -1,0 +1,12 @@
+{
+ "workbench.colorCustomizations": {
+  "tab.unfocusedActiveBorder": "#fff0"
+},
+ "files.exclude": {
+  "**/.vscode": true,
+  "**/build": true,
+  "**/node_modules": true
+},
+"typescript.tsdk": "node_modules\\typescript\\lib",
+"git.ignoreLimitWarning": true
+}

@@ -2,8 +2,6 @@ import { sequelize } from './database';
 import express from 'express';
 import { Server } from 'typescript-rest';
 
-import { Devices } from './models/Devices';
-import { User } from './models/User';
 
 import SocketIO from 'socket.io';
 import * as http from 'http';
@@ -43,7 +41,7 @@ io.on('connection', ()=>{
 });
 
 
-Server.loadServices(apis, './routes/*');
+Server.loadServices(apis, './routes/**/*.ts');
 app.use('apis', apis);
 
 app.listen(port, () => {

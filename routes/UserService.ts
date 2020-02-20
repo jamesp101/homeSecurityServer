@@ -1,6 +1,7 @@
-import { Path, GET, PathParam, POST } from "typescript-rest";
+import { Path, GET, PathParam, POST, PUT, QueryParam } from "typescript-rest";
 
 import {User } from '../models/User';
+import { Device } from "../models/Device";
 
 @Path('/login')
 export class Login {
@@ -27,10 +28,45 @@ export class Register {
 @Path('/user')
 export class UserConfig{
 
-    @Path(':id')
     @GET
-    userDetails(@PathParam('id') id: string,){
+    userDetails(@QueryParam('id') id: string,){
         return User.getUserInfo(id);
     }
 
+    // @GET
+    // allUser(){
+    //     return User.findAll()
+    // }
+
 }
+
+@Path('/devices')
+export class Devices{
+
+    @GET
+    getDevices(@QueryParam('user')id: string){
+        return Device.getDevicesFromUser(id)
+    }
+
+
+/*     @GET
+    getDevice(@QueryParam('id') id: string){
+        return Device.getDevicesFromUser(id)
+    } */
+
+    @Path(':id')
+    @PUT
+    updateDevice(@QueryParam('id') id: string, data: any){
+        return Device.updateDevice(id,data)
+    }
+    
+
+}
+@Path('/devce')
+export class DevceInfo{
+    @GET
+    getDevice(@QueryParam('id') id: string){
+        return Device.getDevice(id)
+    } 
+
+} 

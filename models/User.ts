@@ -5,8 +5,7 @@ import { createHash } from 'crypto';
 
 import { UniqueConstraintError } from 'sequelize';
 
-
-import { Devices } from './Devices';
+import { Device } from './Device';
 
 
 @Table
@@ -40,8 +39,8 @@ export class User extends Model<User> {
 
 
 
-    @HasMany(() => Devices)
-    devices!: Devices[];
+    @HasMany(() => Device)
+    devices!: Device[];
 
     public static async login(data: any) {
         return await User.findOne({
@@ -49,15 +48,14 @@ export class User extends Model<User> {
                 username: data.username,
                 password: this.hashPassword(data.password)
             }
-        }).then(usr => {
-            if (!usr) throw new Error("Username or password incorrect!");
+        }).then(user => {
+            if (!user) throw new Error("Username or password incorrect!");
 
             return {
                 code: 200,
                 description: 'User found',
-                user: {
-                    usr
-                }
+                user
+
 
             }
         }).catch(err => {
@@ -78,7 +76,7 @@ export class User extends Model<User> {
 
     // TODO: Better
     public static async createUser(data: any) {
-        console.log(data);
+        console.log( data);
         return await User.create({
             username: data.username,
             password: this.hashPassword(data.password),
@@ -86,8 +84,11 @@ export class User extends Model<User> {
             firstname: data.firstname,
             lastname: data.lastname
         }).then(user => {
+            console.log('save')
+
             return user.save();
         }).then(user => {
+            console.log('return')
             console.log(`New User: ${user.username}`);
             return {
                 "code": 200,
@@ -105,7 +106,7 @@ export class User extends Model<User> {
     public static async getUserInfo(id: string) {
         return await User.findOne({
             where:{id: id}
-        }).then(user=>{
+        }).then(user=> {
             if(!user) throw new Error('User not found');
 
             return user;
